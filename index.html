@@ -3,10 +3,247 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Zoom & Enhance</title>
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cutive+Mono" rel="stylesheet">
+
+	<style>
+	    #canvas {
+	        width:85%;
+	        text-align: center;
+	        margin: 0 auto;
+	        height: 30%;
+	        margin-left:8%;
+	        border-style: inset;
+	        border-radius: 8px;
+	        border: 2px 2px rgba(0,0,0,0.8);
+	        background:rgba(0,0,0,0.5);
+	        
+	    }
+	    /*#goBtn {
+	        font-family: 'Cutive Mono', monospace;
+            text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+            font-weight:600;
+            letter-spacing: 2px;
+	        font-size:1.8em;
+	        /*margin-right: -30px;*/
+	        /*background: rgba(0,0,0,.5);
+	        border: none;
+	        width:85%;
+	        padding:16px 0;
+	        margin: 0 auto;
+            color: white;
+            cursor: pointer;
+	    }*/
+	    #spaceBetween {
+	        padding: 0 0 20px 0;
+	        /*background-color: green;*/
+	    }
+	    #locationInput {
+	        width:50%;
+	        font-size:1.2em;
+	        padding-top:5px;
+	        line-height: 1.65em;
+	        vertical-align: middle;
+	        letter-spacing: 2px;
+	        padding-left:20px;
+            box-shadow: 1px 1px 8px black inset;
+            font-family: 'Cutive Mono', monospace;
+	    }
+	    #locTit {
+	        vertical-align: middle;
+	        font-size:1.8em;
+	        background: rgba(0,0,0,.2);
+            background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            background-image:  -khtml-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            background-image:    -moz-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            background-image:     -ms-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            background-image:      -o-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            background-image:         linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+            box-shadow: 1px 1px 8px black inset;
+            background-position: 40% 50%;
+            background-size: 4px 4px;
+	        border-radius:20px 0 0 20px;
+	        padding-left: 4%;
+	        padding-top:5px;
+	        padding-bottom:5px;
+	        /*margin-left: -80px;*/
+	        color:white;
+	        font-weight:600;
+	        text-shadow: 2px 2px black ;
+	        border-right:2px solid rgba(0,0,0,.2);
+	    }
+	    #header {
+	        vertical-align: middle;
+	        font-size:1.8em;
+	        background:black;
+            box-shadow: 1px 1px 8px black inset;
+            padding-left: 4%;
+	        padding-top:5px;
+	        padding-bottom:5px;
+	        color:white;
+	        font-weight:600;
+	        margin-bottom:20px;
+	        text-shadow: 2px 2px rgba(255,255,255,.5) ;
+	    }
+	    #agencyText {
+	        position:relative;
+	        margin-bottom:50px;
+	        display:inline;
+	    }
+	    #hero {
+	        text-align: center;
+	        background: rgba(0,0,0,.4);
+            border-radius:8px;
+	        margin-top: 3%;
+	        padding-top: 40px;
+	        padding-bottom: 20px;
+	        margin-left: 8%;
+	        margin-right: 6.6%;
+            overflow:hidden;
+            border-style: inset;
+	    }
+	    
+	    body {
+	        font-family: 'Cutive Mono', monospace;
+	        background: linear-gradient(90deg, rgba(0,0,0,.5) 20px, transparent 1%) center, linear-gradient(rgba(0,0,0,.5) 20px, transparent 1%) center, pink;
+            background-size: 22px 22px;
+            margin: 0;
+            padding: 0;
+            background: url("http://www.bradysammons.com/codepen/darkui/noise.png") repeat;
+            background-size: 522px 500px;
+            background: rgba(0,0,0,1);
+            background-image: url("https://www.transparenttextures.com/patterns/light-aluminum.png");
+                        background-size: 522px 500px;
+
+	    }
+	    
+	    @media screen and (max-width: 1024px) {
+	        #locationInput {margin-top:20px;width:85%;}
+	        #locTit {border-radius:8px;padding-bottom:5px;padding-right:16px;box-shadow: -2px -2px 5px black inset;border-right:0px solid rgba(0,0,0,9);}
+	        #spaceBetween {}
+	        #goBtn {}
+	    }
+a, input[type='radio'] + label {
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* -------------------
+	Default State
+-------------------- */
+a.glowBtn, input[type='radio'] + label {
+  z-index: 10;
+  margin: 0 10px 10px 0;
+  width: 300px;
+  height: 37.29px;
+  line-height: 36.3px;
+  position: relative;
+  font-size: 13.2px;
+  letter-spacing: .1em;
+  color: #0e0e0e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzExMTExMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #111111), color-stop(100%, #000000));
+  background-image: -moz-linear-gradient(#111111, #000000);
+  background-image: -webkit-linear-gradient(#111111, #000000);
+  background-image: linear-gradient(#111111, #000000);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+  -webkit-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+a.glowBtn:after, input[type='radio'] + label:after {
+  z-index: -1;
+  content: '';
+  cursor: pointer;
+  top: 1.98px;
+  width: 300px;
+  height: 33px;
+  display: block;
+  position: absolute;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ0NDQ0NCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzM3MzczOCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #373738));
+  background-image: -moz-linear-gradient(#444444, #373738);
+  background-image: -webkit-linear-gradient(#444444, #373738);
+  background-image: linear-gradient(#444444, #373738);
+  -moz-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* -------------------
+	Hover States
+-------------------- */
+a.glowBtn:hover, a.hover, input[type='radio'] + label:hover {
+  color: #AEAEAE;
+  text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.8) ;
+    font-size:1.2em;
+}
+
+a.glowBtn:hover:after, a.hover:after, input[type='radio'] + label:hover:after {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzU0NTQ1NCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzM3MzczOCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #545454), color-stop(100%, #373738));
+  background-image: -moz-linear-gradient(#545454, #373738);
+  background-image: -webkit-linear-gradient(#545454, #373738);
+  background-image: linear-gradient(#545454, #373738);
+}
+
+/* -------------------
+	Active States
+-------------------- */
+a.glowBtn:active, a.active, a.active:hover, input[type='radio']:checked + label {
+  color: #00ccff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3), 0 0px 30px rgba(0, 255, 255, 0.7);
+  -moz-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+  -webkit-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+  box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+}
+
+a.glowBtn:active, a.active, a.active:hover {
+  text-shadow: 0 -1px 0 black, 0 0px 30px cyan, 0 0px 50px cyan;
+}
+
+a.glowBtn:active:after, a.active:after, a.active:hover:after, input[type='radio']:checked + label:after {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI2MjYyNyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkMmQyZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262627), color-stop(100%, #2d2d2e));
+  background-image: -moz-linear-gradient(#262627, #2d2d2e);
+  background-image: -webkit-linear-gradient(#262627, #2d2d2e);
+  background-image: linear-gradient(#262627, #2d2d2e);
+  -moz-box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+  -webkit-box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+  box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+  
+}
+	</style>
 </head>
 <body>
-	Location: <input type="text" id="locationInput"><input type="button" id="goBtn" value="Enhance!">
-	</br></br>
+	<div id="hero">
+	    <header id="header">
+        <span id="agencyText">Super Official Agency Zoom+Enhance Application</span>
+        </header>
+	    <span id="locTit">Location: </span>
+	    <input type="text" id="locationInput">
+	    <br><div id="spaceBetween"></div>
+	    <a class="glowBtn hover" type="button" id="goBtn"> Enhance</a>
+	    <!--<input type="button" id="goBtn"  value="Enhance!">-->
+	</div>
+	</br>
 	<canvas id="canvas"></canvas>
 	<script type="text/javascript" src="enhance.js"></script>
 </body>
