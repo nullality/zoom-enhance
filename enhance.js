@@ -7,8 +7,8 @@ c.height = 512;
 
 var logoCropHeight = 64;
 
-ctx.strokeStyle = "#0F0";
-ctx.strokeWidth = 3;
+ctx.strokeStyle = "#0f0";
+ctx.strokeWidth = 5;
 
 var locationInput = document.getElementById("locationInput");
 var goBtn = document.getElementById("goBtn");
@@ -29,7 +29,7 @@ image.onload = function() {
 }
 
 var loadImage = function() {
-	if (zoomLevel <= 20) {
+	if (zoomLevel <= 18) {
 		drawGrid();
 		image.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + mapLocation + "&zoom=" + zoomLevel + "&size=" + c.width + "x" + (c.height + logoCropHeight) + "&maptype=satellite"// TODO do this properly
 		zoomLevel += 2;
@@ -46,8 +46,8 @@ goBtn.onclick = function() {
 		return;
 	}
 	
-	zoomLevel = 10;
-	
+	zoomLevel = 5;
+	ctx.fillStyle="rgba(0,0,0,.4)";
 	ctx.fillRect(0, 0, c.width, c.height); //clear canvas
 	
 	loadImage();
