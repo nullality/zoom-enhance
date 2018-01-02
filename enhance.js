@@ -31,7 +31,7 @@ image.onload = function() {
 var loadImage = function() {
 	if (zoomLevel <= 18) {
 		drawGrid();
-		image.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + mapLocation + "&zoom=" + zoomLevel + "&size=" + c.width + "x" + (c.height + logoCropHeight) + "&maptype=satellite"// TODO do this properly
+		image.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + mapLocation + "&zoom=" + zoomLevel + "&size=" + c.width + "x" + (c.height + logoCropHeight) + "&maptype=satellite" + "&key=" +  "AIzaSyD1XyMM8YrEGtw0CVvUGVrlxrbwE_FDuY0"// TODO do this properly
 		zoomLevel += 2;
 	} else {
 		//done
@@ -49,10 +49,9 @@ goBtn.onclick = function() {
 	zoomLevel = 5;
 	ctx.fillStyle="rgba(0,0,0,.4)";
 	ctx.fillRect(0, 0, c.width, c.height); //clear canvas
-	
+
 	loadImage();
 };
-
 var drawGrid = function() {
 	ctx.beginPath();
 	for (var x=1; x<segments; x++) {
@@ -64,6 +63,7 @@ var drawGrid = function() {
 		ctx.lineTo(c.width, y*(c.height/segments));
 	}
 	ctx.stroke();
+
 }
 
 var renderLoop = function() {
@@ -77,6 +77,7 @@ var renderLoop = function() {
 		var height = c.height/segments;
 		ctx.drawImage(image, xPos, yPos+(logoCropHeight/2), width, height, xPos, yPos, width, height);
 		window.setTimeout(function(){window.requestAnimationFrame(renderLoop)}, 40);
+		
 	} else if (zoomLoop < 4) {
 		zoomLoop += 0.05;
 		var width = image.width * zoomLoop;
@@ -85,6 +86,7 @@ var renderLoop = function() {
 		ctx.drawImage(image, (image.width-width)/2, (c.height-height)/2, width, height);
 		ctx.strokeRect((c.width-rectSize)/2, (c.width-rectSize)/2, rectSize, rectSize);
 		window.requestAnimationFrame(renderLoop);
+		
 	} else {
 		loadImage();
 	}
